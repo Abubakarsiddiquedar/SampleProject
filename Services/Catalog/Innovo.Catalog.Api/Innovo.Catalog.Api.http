@@ -1,0 +1,6 @@
+@Innovo.Catalog.Api_HostAddress = http://localhost:5221
+
+GET {{Innovo.Catalog.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
