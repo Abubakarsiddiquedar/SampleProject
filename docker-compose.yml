@@ -1,0 +1,182 @@
+﻿services:
+  redis_cache:
+    image: redis:alpine
+    container_name: redis
+  rabbitmq:
+    image: rabbitmq:4.1-management-alpine
+    container_name: rabbitmq
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.1.3
+    container_name: elasticsearch
+
+  kibana:
+     image: docker.elastic.co/kibana/kibana:9.1.3
+     container_name: kibana
+
+  # grafana:
+  #   image: grafana/grafana:12.1.1
+  #   container_name: grafana
+  prometheus:
+     image: prom/prometheus:latest
+     container_name: prometheus
+
+
+  innovo.identity.api:
+    build:
+         context: .
+         dockerfile: services/identity/Innovo.Identity.Api/Dockerfile
+    container_name: identity
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__Postgres=Host=postgres;Database=identitydb;Username=postgres;Password=postgres
+      - ConnectionStrings__SqlServer=Server=sqlserver,1433;Database=identitydb;User Id=sa;Password=Your_password123;
+      - Redis__Connection=redis:6379
+      - RabbitMQ__Host=rabbitmq
+    ports:
+      - "5001:80"
+    # depends_on:
+    #   - postgres
+    #   - sqlserver
+    #   - redis
+    #   - rabbitmq
+
+  innovo.catalog.api:
+    build: 
+          context: .
+          dockerfile: services/catalog/Innovo.Catalog.Api/Dockerfile
+    container_name: catalog
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__Postgres=Host=postgres;Database=catalogdb;Username=postgres;Password=postgres
+      - ConnectionStrings__SqlServer=Server=sqlserver,1433;Database=catalogdb;User Id=sa;Password=Your_password123;
+      - Redis__Connection=redis:6379
+      - RabbitMQ__Host=rabbitmq
+    ports:
+      - "5002:80"
+    # depends_on:
+    #   - postgres
+    #   - sqlserver
+    #   - redis
+      # - rabbitmq
+
+  # ─────────────── Databases ───────────────
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: "Your_password123"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+
+  # ─────────────── Messaging & Cache ───────────────
+  # redis:
+  #   image: redis:7
+  #   container_name: redis
+  #   ports:
+  #     - "6379:6379"
+
+  # rabbitmq:
+  #   image: rabbitmq:3-management
+  #   container_name: rabbitmq
+  #   ports:
+  #     - "5672:5672"
+  #     - "15672:15672" mgmt UI
+  # - environment:
+  #     RABBITMQ_DEFAULT_USER: guest
+  #     RABBITMQ_DEFAULT_PASS: guest
+
+  # ─────────────── Monitoring ───────────────
+  # prometheus:
+  #   image: prom/prometheus
+  #   container_name: prometheus
+  #   volumes:
+  #     - ./deployment/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+  #   ports:
+  #     - "9090:9090"
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+  #   environment:
+  #     - GF_SECURITY_ADMIN_USER=admin
+  #     - GF_SECURITY_ADMIN_PASSWORD=admin
+  #   depends_on:
+  #     - prometheus
+
+  # ─────────────── Logging (ELK) ───────────────
+  # elasticsearch:
+  #   image: docker.elastic.co/elasticsearch/elasticsearch:8.12.2
+  #   container_name: elasticsearch
+  #   environment:
+  #     - discovery.type=single-node
+  #     - xpack.security.enabled=false
+  #   ports:
+  #     - "9200:9200"
+  #   volumes:
+  #     - elastic-data:/usr/share/elasticsearch/data
+
+  # logstash:
+  #   image: docker.elastic.co/logstash/logstash:8.12.2
+  #   container_name: logstash
+  #   ports:
+  #     - "5044:5044"
+  #   volumes:
+  #     - ./deployment/logstash/pipeline:/usr/share/logstash/pipeline
+  #   depends_on:
+  #     - elasticsearch
+
+  # kibana:
+  #   image: docker.elastic.co/kibana/kibana:8.12.2
+  #   container_name: kibana
+  #   ports:
+  #     - "5601:5601"
+  #   environment:
+  #     - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+  #   depends_on:
+  #     - elasticsearch
+
+  # ─────────────── Docker Management ───────────────
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    restart: always
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+# ─────────────── Volumes ───────────────
+volumes:
+  postgres-data:
+  sqlserver-data:
+  elastic-data:
+  portainer_data:
