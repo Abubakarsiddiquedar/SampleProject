@@ -6,12 +6,7 @@
       "serviceActions": {
         "innovo.catalog.api": "StartDebugging",
         "innovo.identity.api": "StartDebugging",
-        "elasticsearch": "StartWithoutDebugging",
-        "grafana": "StartWithoutDebugging",
-        "kibana": "StartWithoutDebugging",
-        "redis_cache": "StartWithoutDebugging",
-        "sqlserver": "StartWithoutDebugging",
-        "prometheus": "StartWithoutDebugging"
+        "sqlserver": "StartWithoutDebugging"
       }
     }
   }

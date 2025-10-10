@@ -1,15 +1,24 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>$(TargetFramework)</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <EnableRequestDecompression>true</EnableRequestDecompression>
+    <UserSecretsId>Innovo-Catalog-Api-Dev-Secret</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Just reference packages - versions come from Directory.Build.props -->
+    <PackageReference Include="MediatR" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
-    <PackageReference Include="Newtonsoft.Json" />
-    <PackageReference Include="Serilog" />
-    <PackageReference Include="AutoMapper" Version="$(AutoMapperVersion)" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(MicrosoftEntityFrameworkCoreVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\Handlers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Innovo.Catalog.Contracts\Innovo.Catalog.Contracts.csproj" />
   </ItemGroup>
 </Project>

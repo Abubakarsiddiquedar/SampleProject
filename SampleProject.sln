@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovo.Identity.Api", "Serv
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovo.Catalog.Contracts", "Services\Catalog\Innovo.Catalog.Contracts\Innovo.Catalog.Contracts.csproj", "{732F973D-65D1-4097-AD18-A1B5963B6B8B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -151,6 +153,18 @@ Global
 		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|x64.Build.0 = Release|Any CPU
 		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|x86.ActiveCfg = Release|Any CPU
 		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|x86.Build.0 = Release|Any CPU
+		{732F973D-65D1-4097-AD18-A1B5963B6B8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{732F973D-65D1-4097-AD18-A1B5963B6B8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{732F973D-65D1-4097-AD18-A1B5963B6B8B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{732F973D-65D1-4097-AD18-A1B5963B6B8B}.Debug|x64.Build.0 = Debug|Any CPU
+		{732F973D-65D1-4097-AD18-A1B5963B6B8B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{732F973D-65D1-4097-AD18-A1B5963B6B8B}.Debug|x86.Build.0 = Debug|Any CPU
+		{732F973D-65D1-4097-AD18-A1B5963B6B8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{732F973D-65D1-4097-AD18-A1B5963B6B8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{732F973D-65D1-4097-AD18-A1B5963B6B8B}.Release|x64.ActiveCfg = Release|Any CPU
+		{732F973D-65D1-4097-AD18-A1B5963B6B8B}.Release|x64.Build.0 = Release|Any CPU
+		{732F973D-65D1-4097-AD18-A1B5963B6B8B}.Release|x86.ActiveCfg = Release|Any CPU
+		{732F973D-65D1-4097-AD18-A1B5963B6B8B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -166,6 +180,7 @@ Global
 		{0C969ED5-F937-4296-B050-13585F95C0A7} = {357A7C97-5AE1-023F-1442-0D9F9AF22A31}
 		{2EA5B03B-9676-4955-BBCB-6F2752198544} = {357A7C97-5AE1-023F-1442-0D9F9AF22A31}
 		{C3F2870F-75E9-0CC5-4964-35BE147309F4} = {357A7C97-5AE1-023F-1442-0D9F9AF22A31}
+		{732F973D-65D1-4097-AD18-A1B5963B6B8B} = {944ACC7E-4FFC-A2A2-09E1-98A62C66F8DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70B7B948-3993-407D-A045-3CCF15E346C2}

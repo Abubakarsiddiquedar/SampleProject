@@ -1,3 +1,6 @@
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.OpenApi;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
